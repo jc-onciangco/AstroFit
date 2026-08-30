@@ -1,0 +1,111 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Footer from '../../components/Footer.astro';
+
+export async function getStaticPaths() {
+  const news = await getCollection("news");
+
+  return news.map((item) => ({
+    params: { id: item.id },
+    props: { item },
+  }));
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+---
+
+<Layout title={item.data.title}>
+  <div class="w-full bg-[linear-gradient(to_right,transparent_0%,theme(colors.bg)_15%,theme(colors.bg)_85%,transparent_100%)]">
+    <article class="mx-auto max-w-[720px] px-4 py-12 sm:px-6 sm:py-20">
+      <span class="font-mono text-xs uppercase tracking-wide text-accent">
+        {item.data.category}
+      </span>
+      <h1 class="font-display mt-3 text-[28px] uppercase tracking-wide sm:text-[36px]">
+        {item.data.title}
+      </h1>
+      <p class="mt-4 text-text-secondary">{item.data.excerpt}</p>
+
+      <hr class="my-5" />
+
+      <div class="markdown-content mx-auto max-w-[720px]">
+        <Content />
+      </div>
+    </article>
+  </div>
+  <Footer />
+</Layout>
+
+<style>
+  .markdown-content :global(h2) {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: clamp(20px, 4vw, 24px);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .markdown-content :global(p) {
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+    color: var(--text-secondary);
+  }
+
+  .markdown-content :global(a) {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .markdown-content :global(ul),
+  .markdown-content :global(ol) {
+    margin-bottom: 1.25rem;
+    padding-left: 1.5rem;
+  }
+
+  .markdown-content :global(li) {
+    margin-bottom: 0.5rem;
+  }
+
+  .markdown-content :global(strong) {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .markdown-content :global(blockquote) {
+    border-left: 3px solid var(--accent);
+    padding-left: 1rem;
+    font-style: italic;
+    color: var(--text-secondary);
+  }
+
+  .markdown-content :global(code) {
+    background: var(--surface);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-size: 0.9em;
+    word-break: break-word;
+  }
+
+  .markdown-content :global(pre) {
+    overflow-x: auto;
+    max-width: 100%;
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .markdown-content :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 2rem 0;
+  }
+
+  .markdown-content :global(table) {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    max-width: 100%;
+  }
+</style>

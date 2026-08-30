@@ -1,15 +1,31 @@
 ---
-const links = [
+let links = [
   { href: '#news', label: 'News' },
   { href: '#latest', label: 'Blog' },
   { href: '#categories', label: 'Categories' },
   { href: '#', label: 'About' },
 ];
+
+let homepage = "#";
+
+const isHomepage = Astro.url.pathname === '/';
+
+if(!isHomepage) { //if current page is not homepate
+  links = [
+  { href: '/news', label: 'News' },
+  { href: '/blogs', label: 'Blog' },
+  { href: '/categories', label: 'Categories' },
+  { href: '/about', label: 'About' },
+];
+
+homepage = '/';
+}
+
 ---
 
 <header class="sticky top-0 z-50 border-b border-line bg-bg/90 backdrop-blur-md">
   <nav class="mx-auto flex h-[72px] max-w-[1120px] items-center justify-between px-6">
-    <a href="#" class=" font-display text-[22px] tracking-wide">
+    <a href={homepage} class=" font-display text-[22px] tracking-wide">
       ASTRO<span class="text-accent">FIT</span>
     </a>
 

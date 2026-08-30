@@ -1,20 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;600&family=Work+Sans:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;600&family=Work+Sans:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @theme {
-  --color-bg: #14161A;
-  --color-bg-alt: #1B1E23;
-  --color-surface: #F4F4EF;
-  --color-surface-hover: #E9E8DE;
-  --color-accent: #D4FF3F;
-  --color-accent-dim: #9FBE2E;
-  --color-text-secondary: #9CA0A8;
-  --color-line: #2A2D33;
-  --color-line-light: #DDDCD3;
+  --color-bg: #14161a;
+  --color-bg-alt: #1b1e23;
+  --color-surface: #f4f4ef;
+  --color-surface-hover: #e9e8de;
+  --color-accent: #d4ff3f;
+  --color-accent-dim: #9fbe2e;
+  --color-text-secondary: #9ca0a8;
+  --color-line: #2a2d33;
+  --color-line-light: #dddcd3;
 
-  --font-display: 'Anton', sans-serif;
-  --font-body: 'Work Sans', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-display: "Anton", sans-serif;
+  --font-body: "Work Sans", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 }
 
 @layer base {
