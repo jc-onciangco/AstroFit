@@ -1,0 +1,28 @@
+---
+const { class: className } = Astro.props;
+---
+<svg class={className} width="150" height="150" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Heart outline -->
+    <path
+      d="M24 40C24 40 6 29.5 6 17.5C6 11.7 10.6 7 16.3 7C19.6 7 22.4 8.7 24 11.3C25.6 8.7 28.4 7 31.7 7C37.4 7 42 11.7 42 17.5C42 29.5 24 40 24 40Z"
+      stroke="currentColor"
+      stroke-width="2.5"
+      stroke-linejoin="round"
+    />
+    <!-- Pulse line through the heart -->
+    <path
+      d="M12 21H18L21 15L25 27L28 21H36"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+
+  <style>
+
+    /* svg {
+      rotate: 45deg;
+    } */
+
+  </style>

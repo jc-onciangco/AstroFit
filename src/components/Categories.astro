@@ -1,0 +1,93 @@
+---
+import DumbbellIcon from "../components/icons/DumbbellIcon.astro";
+import HeartIcon from "../components/icons/HeartIcon.astro";
+import FruitIcon from "../components/icons/FruitIcon.astro";
+import MoonIcon from "../components/icons/MoonIcon.astro";
+
+const categories = [
+  { num: '01', name: 'Strength', Icon: DumbbellIcon },
+  { num: '02', name: 'Cardio', Icon: HeartIcon },
+  { num: '03', name: 'Nutrition', Icon: FruitIcon },
+  { num: '04', name: 'Recovery', Icon: MoonIcon },
+];
+---
+
+<section id="categories" class="bg-surface py-20 text-bg">
+  <div class="mx-auto max-w-[1120px] px-6">
+    <div class="mb-10 flex flex-wrap items-baseline justify-between gap-3 border-b border-line-light pb-5">
+      <h2 class="sec3_header font-display text-[32px] uppercase tracking-wide">Categories</h2>
+      <span class="eyebrow-text font-mono text-xs tracking-wide text-[#6B6D67]">Pick your focus</span>
+    </div>
+
+    <div class="grid grid-cols-2 gap-px border border-line-light bg-line-light hover:border-transparent hover:bg-transparent md:grid-cols-4">
+      {categories.map((cat) => (
+        <div class="group relative overflow-hidden cursor-pointer bg-surface px-5 py-8 text-center transition-all hover:z-20 hover:scale-120 hover:bg-accent">
+          <cat.Icon class="absolute text-accent transition-all group-hover:text-white group-hover:scale-200" />
+          <div class="relative z-10">
+            <span class="mb-3.5 block font-mono text-[11px] text-accent-dim">{cat.num}</span>
+            <h4 class="font-display text-lg uppercase tracking-wide group-hover:scale-150">{cat.name}</h4>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { SplitText } from "gsap/SplitText";
+
+  gsap.registerPlugin([ScrollTrigger, SplitText]);
+
+  const el = document.querySelector(".eyebrow-text");
+
+  gsap.from(".sec3_header", {
+    scrollTrigger: {
+      trigger: "#categories",
+      start: "top 75%",
+      end: "bottom 90%",
+      toggleActions: "play none none reverse",
+      scrub: false,
+      markers: false, // uncomment to debug
+    },
+    y: 100,
+    opacity: 0,
+  });
+
+  gsap.from(".eyebrow-text", {
+    scrollTrigger: {
+      trigger: "#categories",
+      start: "top 75%",
+      end: "bottom 90%",
+      toggleActions: "play none none reverse",
+      scrub: false,
+      markers: false, // uncomment to debug
+    },
+    y: 100,
+    opacity: 0,
+  });
+
+  if (el) {
+    // Split into individual characters
+    const split = new SplitText(el, { type: "chars" });
+
+    function playAnimation() {
+      gsap.fromTo(
+        split.chars,
+        { opacity: 0.3, y: 4 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.4,
+          stagger: 0.03,
+          ease: "power2.out",
+        }
+      );
+    }
+
+    // Play once immediately, then repeat every 5 seconds
+    playAnimation();
+    setInterval(playAnimation, 5000);
+  }
+</script>

@@ -1,0 +1,44 @@
+---
+const { class: className } = Astro.props;
+---
+<svg class={className} width="150" height="150" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Leaf -->
+    <path
+      d="M25 9C25 9 27 4 33 5C33 5 32.5 10.5 27 11.5"
+      stroke="currentColor"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <!-- Stem -->
+    <path
+      d="M24 11V15"
+      stroke="currentColor"
+      stroke-width="2.5"
+      stroke-linecap="round"
+    />
+    <!-- Apple body (two lobes) -->
+    <path
+      d="M24 15C17 15 12 20.5 12 28C12 35.5 17.5 41 22 41C23 41 23.3 40.5 24 40.5C24.7 40.5 25 41 26 41C30.5 41 36 35.5 36 28C36 20.5 31 15 24 15Z"
+      stroke="currentColor"
+      stroke-width="2.5"
+      stroke-linejoin="round"
+    />
+    <!-- Center divide hint -->
+    <path
+      d="M24 15.5C24 15.5 21.5 19 24 24"
+      stroke="currentColor"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      opacity="0.5"
+    />
+  </svg>
+
+  <style>
+
+    svg {
+      rotate: -45deg;
+      translate: 10% 0;
+    }
+
+  </style>

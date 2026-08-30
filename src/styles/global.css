@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;600&family=Work+Sans:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #14161A;
+  --color-bg-alt: #1B1E23;
+  --color-surface: #F4F4EF;
+  --color-surface-hover: #E9E8DE;
+  --color-accent: #D4FF3F;
+  --color-accent-dim: #9FBE2E;
+  --color-text-secondary: #9CA0A8;
+  --color-line: #2A2D33;
+  --color-line-light: #DDDCD3;
+
+  --font-display: 'Anton', sans-serif;
+  --font-body: 'Work Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-bg text-[#F4F4EF] font-body antialiased;
+    line-height: 1.6;
+  }
+  :focus-visible {
+    @apply outline outline-2 outline-accent outline-offset-[3px];
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    transition: none !important;
+  }
+}

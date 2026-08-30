@@ -1,0 +1,77 @@
+---
+const links = [
+  { href: '#news', label: 'News' },
+  { href: '#latest', label: 'Blog' },
+  { href: '#categories', label: 'Categories' },
+  { href: '#', label: 'About' },
+];
+---
+
+<header class="sticky top-0 z-50 border-b border-line bg-bg/90 backdrop-blur-md">
+  <nav class="mx-auto flex h-[72px] max-w-[1120px] items-center justify-between px-6">
+    <a href="#" class=" font-display text-[22px] tracking-wide">
+      ASTRO<span class="text-accent">FIT</span>
+    </a>
+
+    <div id="nav-links" class="hidden gap-8 text-sm font-medium text-text-secondary md:flex">
+      {links.map((l) => (
+        <a href={l.href} class="transition-colors hover:text-[#F4F4EF]">{l.label}</a>
+      ))}
+    </div>
+
+    <button
+      class="hidden font-mono text-xs font-semibold tracking-wide bg-accent text-bg px-[18px] py-[10px] transition-colors hover:bg-accent-dim md:inline-block"
+    >
+      Subscribe
+    </button>
+
+    <button
+      id="nav-toggle"
+      class="text-2xl text-[#F4F4EF] md:hidden"
+      aria-label="Open menu"
+      aria-expanded="false"
+    >
+      &#9776;
+    </button>
+  </nav>
+
+  <div
+    id="nav-links-mobile"
+    class="hidden flex-col gap-4 border-b border-line bg-bg px-6 py-5 md:hidden"
+  >
+    {links.map((l) => (
+      <a href={l.href} class="text-sm font-medium text-text-secondary hover:text-[#F4F4EF]">{l.label}</a>
+    ))}
+  </div>
+</header>
+
+<style>
+
+header {
+  animation: slideDown 0.6s ease-out forwards;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+</style>
+
+<script>
+const toggle = document.getElementById('nav-toggle');
+const mobileLinks = document.getElementById('nav-links-mobile');
+
+toggle?.addEventListener('click', () => {
+  const isOpen = mobileLinks?.classList.contains('flex');
+  mobileLinks?.classList.toggle('hidden', isOpen);
+  mobileLinks?.classList.toggle('flex', !isOpen);
+  toggle.setAttribute('aria-expanded', String(!isOpen));
+});
+</script>

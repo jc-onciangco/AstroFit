@@ -1,0 +1,85 @@
+---
+const posts = [
+  { index: 'LOG 01', title: 'The 5x5 program that actually built strength', excerpt: 'A no-frills breakdown of the plan I ran for 12 weeks, week by week.', category: 'Strength', readTime: '6 min' },
+  { index: 'LOG 02', title: 'What I actually eat post-workout', excerpt: 'Macros, timing, and the three meals I rotate through every week.', category: 'Nutrition', readTime: '4 min' },
+  { index: 'LOG 03', title: '30-minute cardio for people who hate running', excerpt: 'Four low-impact sessions that still get your heart rate up.', category: 'Cardio', readTime: '5 min' },
+];
+---
+
+<section id="latest" class="relative py-20 scroll-mt-[50px]">
+  <div class="pointer-events-none absolute inset-0 bottom-1/2 bg-[radial-gradient(ellipse_90%_100%_at_100%_0%,rgba(20,22,26,0)_0%,#14161A_85%)]"></div>
+  <div class="pointer-events-none absolute inset-0 top-1/2 bg-[radial-gradient(ellipse_90%_100%_at_0%_100%,rgba(20,22,26,0)_0%,#14161A_85%)]"></div>
+
+  <!-- <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_70%_at_100%_0%,rgba(20,22,26,0)_0%,#14161A_85%)]"></div> -->
+
+  <div class="relative z-10 mx-auto max-w-[1120px] px-6">
+    <div class="mb-10 flex flex-wrap items-baseline justify-between gap-3 border-b border-line pb-5">
+      <h2 class="sec2-header font-display text-[32px] uppercase tracking-wide">Latest from the blog</h2>
+      <span id="blog-count" class="font-mono text-xs tracking-wide text-text-secondary">03 posts this week</span>
+    </div>
+
+    <div id="latest-blogs" class="grid grid-cols-1 gap-px  md:grid-cols-3">
+      {posts.map((post) => (
+        <article class="latest-blog flex flex-col bg-bg p-6 transition-colors hover:bg-bg-alt">
+          <span class="mb-4 font-mono text-xs tracking-wide text-accent">{post.index}</span>
+          <div class="mb-[18px] flex h-[140px] items-center justify-center border border-line bg-bg-alt font-mono text-[11px] text-text-secondary">
+            COVER IMAGE
+          </div>
+          <h3 class="mb-2.5 text-lg font-bold leading-snug">{post.title}</h3>
+          <p class="mb-5 flex-grow text-sm text-text-secondary">{post.excerpt}</p>
+          <div class="flex items-center justify-between border-t border-line pt-3.5 font-mono text-[11px] uppercase tracking-wide text-text-secondary">
+            <span>{post.category}</span>
+            <span>{post.readTime}</span>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>  
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from(".sec2-header", {
+    scrollTrigger: {
+      trigger: "#latest",
+      start: "top 75%",
+      end: "bottom 90%",
+      toggleActions: "play none none reverse",
+      scrub: false,
+      //markers: true, // uncomment to debug
+    },
+    y: 100,
+    opacity: 0,
+  });
+
+  gsap.from("#blog-count", {
+    scrollTrigger: {
+      trigger: "#latest",
+      start: "top 75%",
+      end: "bottom 90%",
+      toggleActions: "play none none reverse",
+      scrub: false,
+      //markers: true, // uncomment to debug
+    },
+    scale: 0,
+    opacity: 0,
+  });
+
+  gsap.from(".latest-blog", {
+    scrollTrigger: {
+      trigger: "#latest-blogs",
+      start: "top 80%",
+      toggleActions: "play none none reverse",
+      //markers: true, // uncomment to debug
+    },
+    x: 60,
+    opacity: 0,
+    duration: 0.8,
+    ease: "power3.out",
+    stagger: 0.15, // <- each card starts 0.15s after the previous one
+  });
+</script>

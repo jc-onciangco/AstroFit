@@ -1,0 +1,66 @@
+---
+const items = [
+  { time: '2 HRS AGO', tag: 'Research', headline: "New study links zone 2 cardio to longer VO2 max gains" },
+  { time: '6 HRS AGO', tag: 'Gear', headline: 'Whoop and Garmin both drop new recovery-tracking wearables' },
+  { time: '1 DAY AGO', tag: 'Events', headline: "Registration opens for this year's national deadlift championship" },
+  { time: '2 DAYS AGO', tag: 'Trending', headline: '"12-3-30" walking workout resurfaces as the internet\'s new favorite' },
+];
+---
+
+<section id="news" class="relative pt-14 pb-20 scroll-mt-[72px]">
+  <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_70%_at_100%_100%,rgba(20,22,26,0)_0%,#14161A_85%)]"></div>
+
+  <div class="mx-auto max-w-[1120px] px-6">
+    <div class="mb-10 flex flex-wrap items-baseline justify-between gap-3 border-b border-line pb-5">
+      <h2 class="sec1-header font-display text-[32px] uppercase tracking-wide">Latest news</h2>
+      <span class="font-mono text-xs tracking-wide text-text-secondary">Updated daily</span>
+    </div>
+
+    <div class="list-news border-t border-line">
+      {items.map((item) => (
+        <a
+          href="#"
+          class="flex flex-wrap items-baseline gap-x-5 gap-y-1.5 border-b border-line py-5 transition-[padding] hover:pl-2 sm:flex-nowrap"
+        >
+          <span class="w-[90px] flex-shrink-0 font-mono text-[11px] text-accent whitespace-nowrap">{item.time}</span>
+          <span class="w-[110px] flex-shrink-0 font-mono text-[11px] uppercase tracking-wide text-text-secondary">{item.tag}</span>
+          <span class="order-3 w-full text-[15px] font-medium sm:order-none sm:w-auto sm:flex-grow">{item.headline}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { fade } from "astro:transitions";
+import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from(".sec1-header", {
+    scrollTrigger: {
+      trigger: "#news",
+      start: "top 75%",
+      end: "bottom 90%",
+      toggleActions: "play none none reverse",
+      scrub: false,
+      markers: false, // uncomment to debug
+    },
+    y: 100,
+    opacity: 0,
+  });
+
+  gsap.from(".list-news a", {
+    scrollTrigger: {
+      trigger: ".list-news",
+      start: "top 75%",
+      markers: false,
+      toggleActions: "play none none reverse",
+    },
+    x: 100,
+    opacity: 0,
+    stagger: 0.15,
+    duration: 0.6,
+  });
+</script>

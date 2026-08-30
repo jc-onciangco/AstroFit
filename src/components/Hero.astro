@@ -1,0 +1,63 @@
+---
+---
+
+<section class="relative overflow-hidden border-b border-line  py-24 md:py-[90px]">
+  <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_70%_at_50%_0%,rgba(20,22,26,0)_0%,#14161A_85%)]"></div>
+
+  <div class="relative z-10 mx-auto max-w-[1120px] px-6 text-center">
+    <p class="eyebrow mb-5 font-mono text-xs tracking-[2px] text-accent uppercase">
+      Fitness blog & news — est. 2026
+    </p>
+
+    <h1 class="header mx-auto mb-6 max-w-[900px] font-display text-[44px] uppercase leading-[0.98] tracking-wide sm:text-[64px] lg:text-[92px]">
+      Train smart.<br />
+      Stay <span class="text-accent">informed</span>.
+    </h1>
+
+    <p class="subtitle mx-auto mb-9 max-w-[480px] text-[17px] text-text-secondary">
+      Workout guides, nutrition breakdowns, and the fitness news worth actually reading.
+    </p>
+
+    <div class="ctas flex flex-wrap justify-center gap-3.5">
+      <button class="cta bg-accent px-7 py-[15px] font-mono text-[13px] font-semibold tracking-wide text-bg transition-all hover:-translate-y-px hover:bg-accent-dim">
+        Read the blog
+      </button>
+      <button class="border border-line px-7 py-[15px] font-mono text-[13px] font-semibold tracking-wide text-[#F4F4EF] transition-colors hover:border-text-secondary">
+        See latest news
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
+const tl = gsap.timeline({
+    defaults: { ease: "elasctic" },
+});
+
+tl.set(".header", {
+  opacity: 0,
+  scale: 0,
+})
+.set(".eyebrow", {
+  opacity: 0,
+  yPercent: 50
+})
+.set(".subtitle", {
+  opacity: 0,
+  yPercent: -50
+})
+.set(".ctas", {
+  opacity: 0,
+  yPercent: -50
+})
+.to('.header', {opacity: 1, scale: 1, duration: 1})
+.to('.eyebrow', {opacity: 1, yPercent: 0, duration: 1}, "-=0.5")
+.to('.subtitle', {opacity: 1, yPercent: 0, duration: 1}, "<")
+.to('.ctas', {opacity: 1, yPercent: 0, duration: 1}, "<");
+
+</script>
