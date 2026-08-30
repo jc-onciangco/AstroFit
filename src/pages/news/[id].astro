@@ -103,9 +103,30 @@ const { Content } = await render(item);
   }
 
   .markdown-content :global(table) {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-    max-width: 100%;
-  }
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+  max-width: 100%;
+  border-collapse: collapse;
+}
+
+.markdown-content :global(th),
+.markdown-content :global(td) {
+  border: 1px solid var(--line, #333);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+.markdown-content :global(th) {
+  background: var(--color-accent-dim);
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--color-bg);
+}
+
+.markdown-content :global(tr:nth-child(even)) {
+  background: color-mix(in srgb, var(--surface) 50%, transparent);
+}
 </style>
