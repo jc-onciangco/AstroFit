@@ -1,8 +1,13 @@
 ---
 import { getCollection } from 'astro:content';
 import { formatRelativeTime } from '../scripts/utils/formatRelativeTime';
+import NewsList from './NewsList.astro';
 
-const news = await getCollection('news');
+const allNews = await getCollection('news');
+
+const latestNews = allNews
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+  .slice(0, 4);
 ---
 
 <section id="news" class="relative pt-14 pb-20 scroll-mt-[72px]">
@@ -17,15 +22,7 @@ const news = await getCollection('news');
     </div>
 
     <div class="list-news border-t border-line">
-      {news.map((item) => (
-        <a
-          href={`/news/${item.id}`}
-          class="flex flex-wrap items-baseline gap-x-5 gap-y-1.5 border-b border-line py-5 transition-[padding] hover:pl-2 sm:flex-nowrap"
-        >
-          <span class="w-[90px] flex-shrink-0 font-mono text-[11px] text-accent whitespace-nowrap">{formatRelativeTime(item.data.publishDate)}</span>
-          <span class="order-3 w-full text-[15px] font-medium sm:order-none sm:w-auto sm:flex-grow">{item.data.title}</span>
-        </a>
-      ))}
+      <NewsList news={latestNews} />
     </div>
   </div>
 </section>

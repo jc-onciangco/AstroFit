@@ -1,0 +1,24 @@
+---
+import { formatRelativeTime } from "../scripts/utils/formatRelativeTime";
+
+const { news, displayExcerpt = false } = Astro.props;
+---
+<div>
+    {news.map((item) => (
+      <a
+        href={`/news/${item.id}`}
+        class="group flex flex-wrap items-baseline gap-x-5 gap-y-1.5 border-b border-line py-5 transition-[padding] hover:pl-2 sm:flex-nowrap"
+      >
+        <span class="w-[90px] flex-shrink-0 font-mono text-[11px] text-accent whitespace-nowrap">{formatRelativeTime(item.data.publishDate)}</span>
+        <span class="w-[110px] flex-shrink-0 font-mono text-[11px] uppercase tracking-wide text-text-secondary">{item.data.category}</span>
+        <div class="order-3 w-full">
+          <span class="text-[15px] font-medium sm:order-none sm:w-auto sm:flex-grow">{item.data.title}</span>
+          <div class:list={['grid', {'transition-all duration-300 ease-out grid-rows-[0fr] group-hover:grid-rows-[1fr]' : !displayExcerpt }]}>
+            <p class:list={['text-[11px] text-text-secondary', {'text-[11px] text-text-secondary opacity-0 overflow-hidden group-hover:opacity-100 transition-opacity duration-300 ease-out': !displayExcerpt}]}>
+              {item.data.excerpt}
+            </p>
+          </div>
+        </div>
+      </a>
+    ))}
+  </div>

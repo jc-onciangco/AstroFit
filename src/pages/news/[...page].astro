@@ -4,6 +4,8 @@ import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import Nav from "../../components/Nav.astro";
 import { formatRelativeTime } from "../../scripts/utils/formatRelativeTime";
+import Footer from "../../components/Footer.astro";
+import NewsList from "../../components/NewsList.astro";
 
 export async function getStaticPaths({ paginate }) {
   const news = await getCollection("news");
@@ -12,7 +14,7 @@ export async function getStaticPaths({ paginate }) {
     (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
   );
 
-  return paginate(sortedNews, { pageSize: 1 });
+  return paginate(sortedNews, { pageSize: 10 });
 }
 
 const { page } = Astro.props;
@@ -20,28 +22,32 @@ const { page } = Astro.props;
 
 <Layout title="News | AstroFit">
   <Nav />
+  <div class="w-full bg-[linear-gradient(to_right,transparent_0%,theme(colors.bg)_15%,theme(colors.bg)_85%,transparent_100%)]">
+    <div class="mx-auto max-w-[720px] px-4 py-12 sm:px-6 sm:py-20">
+      <div id="main-news">
+        <NewsList news={page.data} displayExcerpt={true} />
+      </div>
+    
+      <nav class="mt-10 flex items-center justify-center gap-4">
+        {page.url.prev && <a href={page.url.prev}>← Previous</a>}
+        <span class="font-mono text-xs text-text-secondary">
+          Page {page.currentPage} of {page.lastPage}
+        </span>
+        {page.url.next && <a href={page.url.next}>Next →</a>}
+      </nav>
+    </div>
 
-  <div class="list-news border-t border-line">
-    {page.data.map((item) => (
-      <a
-        href={`/news/${item.id}`}
-        class="flex flex-wrap items-baseline gap-x-5 gap-y-1.5 border-b border-line py-5 transition-[padding] hover:pl-2 sm:flex-nowrap"
-      >
-        <span class="w-[90px] flex-shrink-0 font-mono text-[11px] text-accent whitespace-nowrap">
-          {formatRelativeTime(item.data.publishDate)}
-        </span>
-        <span class="order-3 w-full text-[15px] font-medium sm:order-none sm:w-auto sm:flex-grow">
-          {item.data.title}
-        </span>
-      </a>
-    ))}
   </div>
-
-  <nav class="mt-10 flex items-center justify-center gap-4">
-    {page.url.prev && <a href={page.url.prev}>← Previous</a>}
-    <span class="font-mono text-xs text-text-secondary">
-      Page {page.currentPage} of {page.lastPage}
-    </span>
-    {page.url.next && <a href={page.url.next}>Next →</a>}
-  </nav>
+  <Footer />
 </Layout>
+
+<script>
+  import gsap from "gsap";
+
+  gsap.from("#main-news a", {
+    x: 100,
+    opacity: 0,
+    stagger: 0.15,
+    duration: 0.6,
+  });
+</script>
